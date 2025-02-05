@@ -1,4 +1,4 @@
-﻿using Business.Entities.Abstract;
+﻿using Core.Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,38 +7,38 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.DataAccess.EntityFreamwork
+namespace Core.DataAccess.EntityFreamwork
 {
     public class EFEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
         where TContext : DbContext
     {
-        void IEntityRepository<TEntity>.Add(TEntity entity)
+        public void Add(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        Task IEntityRepository<TEntity>.AddAsync(TEntity entity)
+        public Task AddAsync(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        void IEntityRepository<TEntity>.Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        TEntity IEntityRepository<TEntity>.Get(Expression<Func<TEntity, bool>> filter, bool noTrack)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter, bool noTrack = false)
         {
             throw new NotImplementedException();
         }
 
-        List<TEntity> IEntityRepository<TEntity>.GetList(Expression<Func<TEntity, bool>> filter)
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        void IEntityRepository<TEntity>.Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             throw new NotImplementedException();
         }
