@@ -13,6 +13,12 @@ namespace Core.DataAccess.EntityFreamwork
         where TEntity : class, IEntity, new()
         where TContext : DbContext
     {
+        private readonly TContext _context;
+        public EFEntityRepositoryBase(TContext context)
+        {
+            _context = context;
+        }
+
         public void Add(TEntity entity)
         {
             throw new NotImplementedException();
@@ -29,11 +35,6 @@ namespace Core.DataAccess.EntityFreamwork
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter, bool noTrack = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
