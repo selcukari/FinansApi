@@ -12,7 +12,6 @@ namespace Core.DataAccess
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {
         T Get(Expression<Func<T, bool>> filter, bool noTrack = false);
-        List<T> GetList(Expression<Func<T, bool>> filter = null);
         void Add(T entity);
         Task AddAsync(T entity);
         void Update(T entity);
