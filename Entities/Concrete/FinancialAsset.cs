@@ -12,7 +12,7 @@ namespace Entities.Concrete
 {
     public class FinancialAsset: IEntity
     {
-        [Column("asset_id"), Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AssetId { get; set; }
         public string AssetTypeId { get; set; }
         public decimal UnitPrice { get; set; }

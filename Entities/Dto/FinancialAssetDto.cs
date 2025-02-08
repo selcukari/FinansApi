@@ -13,6 +13,7 @@ namespace Entities.Dto
         public decimal UnitPrice { get; set; }
         public DateTime PriceDate { get; set; }
         public string Source { get; set; }
+
         public AssetTypeDto AssetType { get; set; }
     }
 }
