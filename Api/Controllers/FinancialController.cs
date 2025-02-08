@@ -21,13 +21,19 @@ namespace Api.Controllers
 
         }
 
-        [Route("financials")]
+        [Route("financials")] // ef
         public List<FinancialAssetDto> Financials()
         {
 
             return _financialService.GetList();
         }
-        [Route("getByFinancial")]
+        [Route("dbfinancials")] // dapper
+        public Task<List<FinancialAssetDto>> DbFinancials()
+        {
+
+            return _dpFinancialService.GetListDb();
+        }
+        [Route("getByFinancial")] // ef
         public List<FinancialAssetDto> GetByFinancial(string sembol)
         {
 

@@ -12,5 +12,6 @@ namespace DataAccess.Abstract.Dapper
     public interface IDpFinancialDal
     {
         Task<FinancialAssetDto> GetFinancialInfo(int financialId);
+        Task<List<FinancialAssetDto>> FinancialListDb();
     }
 }

@@ -10,5 +10,6 @@ namespace Business.Abstract.Dapper
     public interface IDpFinancialService
     {
         Task<FinancialAssetDto> GetFinancial(int financialId);
+        Task<List<FinancialAssetDto>> GetListDb();
     }
 }

@@ -4,6 +4,7 @@ using Entities.Concrete;
 using Entities.Dto;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,6 +23,38 @@ namespace DataAccess.Concrete.Dapper
         {
             _configuration = configuration;
             _baseFinancialDp = baseDp;
+        }
+
+        public async Task<List<FinancialAssetDto>> FinancialListDb()
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+
+                const string query = @"
+                SELECT fa.asset_id AS AssetId, fa.asset_type_id AS AssetTypeId, 
+                   fa.unit_price AS UnitPrice, fa.price_date AS PriceDate, 
+                   fa.source AS Source, 
+                   at.asset_type_id AS AssetTypeId, at.asset_name AS AssetName
+                FROM financial_assets fa
+                LEFT JOIN asset_types at ON fa.asset_type_id = at.asset_type_id";
+
+                var result = await connection.QueryAsync<FinancialAssetDto, AssetTypeDto, FinancialAssetDto>(
+                     query,
+                     (fa, at) =>
+                     {
+                         fa.AssetType = at;
+                         return fa;
+                     },
+                    splitOn: "AssetTypeId"
+                 );
+
+                if (result == null || !result.Any())
+                {
+                    return null;
+                }
+
+                return result.ToList();
+            }
         }
 
         public async Task<FinancialAssetDto> GetFinancialInfo(int financialId)

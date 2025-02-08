@@ -4,6 +4,7 @@ using DataAccess.Abstract.Dapper;
 using DataAccess.Concrete.Dapper;
 using DataAccess.Concrete.EntityFreamwork;
 using Entities.Dto;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace Business.Concrete.Dapper
         public Task<FinancialAssetDto> GetFinancial(int financialId)
         {
             return _dpFinancialDal.GetFinancialInfo(financialId);
+        }
+
+        public Task<List<FinancialAssetDto>> GetListDb()
+        {
+            return _dpFinancialDal.FinancialListDb();
         }
     }
 }
