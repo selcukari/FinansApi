@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Abstract.Dapper;
+using DataAccess.Abstract.Dapper;
 using Entities.Concrete;
 using Entities.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,13 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class FinancialController : Controller
     {
-        IFinancialService _financialService;
-        public FinancialController(IFinancialService financialService)
+        private readonly IFinancialService _financialService;
+        private readonly IDpFinancialService _dpFinancialService;
+
+        public FinancialController(IFinancialService financialService, IDpFinancialService dpFinancialService)
         {
             _financialService = financialService;
+            _dpFinancialService = dpFinancialService;
 
         }
 
@@ -27,6 +32,12 @@ namespace Api.Controllers
         {
 
             return _financialService.GetByFinancial(sembol);
+        }
+        [Route("getFinancial")]
+        public Task<FinancialAssetDto> GetFinancial(int financialId)
+        {
+
+            return _dpFinancialService.GetFinancial(financialId);
         }
     }
 }
