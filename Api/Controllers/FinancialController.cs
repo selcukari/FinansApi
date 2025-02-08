@@ -33,7 +33,7 @@ namespace Api.Controllers
 
             return _financialService.GetByFinancial(sembol);
         }
-        [Route("getFinancial")]
+        [Route("getFinancial")] // dapper
         public Task<FinancialAssetDto> GetFinancial(int financialId)
         {
 
