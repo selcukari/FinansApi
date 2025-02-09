@@ -1,7 +1,7 @@
 # FinansApi
 FinansApi
 
-EntityFreamwork and Dapper were used
+EntityFreamwork, Dapper, MemCacheService and RedisCache were used
 
 financials- all financial data returns - EntityFreamwork
 
