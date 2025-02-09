@@ -21,13 +21,13 @@ namespace Api.Controllers
 
         }
 
-        [Route("financials")] // ef
+        [Route("financials"), ResponseCache(Duration = 60)] // ef, memorycahe
         public List<FinancialAssetDto> Financials()
         {
 
             return _financialService.GetList();
         }
-        [Route("dbfinancials")] // dapper
+        [Route("dpfinancials"), ResponseCache(Duration = 60)] // dapper
         public Task<List<FinancialAssetDto>> DbFinancials()
         {
 
@@ -39,7 +39,7 @@ namespace Api.Controllers
 
             return _financialService.GetByFinancial(sembol);
         }
-        [Route("getFinancial")] // dapper
+        [Route("getFinancial"), ResponseCache(Duration = 60)] // dapper
         public Task<FinancialAssetDto> GetFinancial(int financialId)
         {
 

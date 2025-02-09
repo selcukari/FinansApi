@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Abstract.Cache;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dto;
@@ -12,21 +13,42 @@ namespace Business.Concrete
 {
     public class FinancialManager: IFinancialService
     {
-        private IFinancialDal _financialDal;
+        private readonly IFinancialDal _financialDal;
+        private readonly ICacheService _cacheService;
 
-        public FinancialManager(IFinancialDal financialDal)
+        public FinancialManager(IFinancialDal financialDal, ICacheService cacheService)
         {
             _financialDal = financialDal;
+            _cacheService = cacheService;
         }
 
         public List<FinancialAssetDto> GetByFinancial(string sembol)
         {
-            return new List<FinancialAssetDto>(_financialDal.GetByFinancial(sembol));
+            var cacheKey = $"{sembol}";
+
+            var financialListBy = _cacheService.Get<List<FinancialAssetDto>>(cacheKey);
+
+            if (financialListBy == null)
+            {
+                financialListBy = new List<FinancialAssetDto>(_financialDal.GetByFinancial(sembol));
+                _cacheService.Set(cacheKey, financialListBy, TimeSpan.FromMinutes(10));
+            }
+
+            return financialListBy;
         }
 
         public List<FinancialAssetDto> GetList()
         {
-            return new List<FinancialAssetDto>(_financialDal.FinancialList());
+            var cacheKey = $"financialList";
+            var financialList = _cacheService.Get<List<FinancialAssetDto>>(cacheKey);
+
+            if (financialList == null)
+            {
+                financialList = new List<FinancialAssetDto>(_financialDal.FinancialList());
+                _cacheService.Set(cacheKey, financialList, TimeSpan.FromMinutes(10));
+            }
+
+            return financialList;
         }
     }
 }
