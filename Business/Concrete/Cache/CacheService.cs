@@ -10,36 +10,36 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete.Cache
 {
-    public class RedisCacheService : ICacheService
-    {
-        private readonly IDatabase _database;
+    //public class RedisCacheService : ICacheService
+    //{
+    //    private readonly IDatabase _database;
 
-        public RedisCacheService()
-        {
-            var connection = ConnectionMultiplexer.Connect("localhost:6379");
-            _database = connection.GetDatabase();
-        }
-        public T Get<T>(string key)
-        {
-            var value = _database.StringGet(key);
-            if (value.IsNullOrEmpty) return default;
+    //    public RedisCacheService(string connectionString)
+    //    {
+    //        var connection = ConnectionMultiplexer.Connect(connectionString);
+    //        _database = connection.GetDatabase();
+    //    }
+    //    public T Get<T>(string key)
+    //    {
+    //        var value = _database.StringGet(key);
+    //        if (value.IsNullOrEmpty) return default;
 
-            return JsonSerializer.Deserialize<T>(value);
-        }
+    //        return JsonSerializer.Deserialize<T>(value);
+    //    }
 
-        public void Remove(string key)
-        {
-            _database.KeyDelete(key);
-        }
+    //    public void Remove(string key)
+    //    {
+    //        _database.KeyDelete(key);
+    //    }
 
-        public void Set<T>(string key, T value, TimeSpan? expiration = null)
-        {
-            if (value == null) return;
+    //    public void Set<T>(string key, T value, TimeSpan? expiration = null)
+    //    {
+    //        if (value == null) return;
 
-            var jsonValue = JsonSerializer.Serialize(value);
-            _database.StringSet(key, jsonValue, expiration);
-        }
-    }
+    //        var jsonValue = JsonSerializer.Serialize(value);
+    //        _database.StringSet(key, jsonValue, expiration);
+    //    }
+    //}
 
     public class MemCacheService : ICacheService
     {
@@ -54,7 +54,6 @@ namespace Business.Concrete.Cache
         {
             if (_cache.Contains(key))
             {
-                Console.WriteLine("cacheden geldi");
                 return (T)_cache.Get(key);
             }
             return default;

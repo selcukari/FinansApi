@@ -26,7 +26,9 @@ builder.Services.AddScoped<IFinancialService, FinancialManager>();
 builder.Services.AddScoped<IFinancialDal, EFFinancialDal>();
 
 // cache
-builder.Services.AddScoped<ICacheService, RedisCacheService>();
+// builder.Services.AddScoped<ICacheService, RedisCacheService>();
+//builder.Services.AddScoped<ICacheService>(provider =>
+//    new RedisCacheService("localhost:6379"));
 builder.Services.AddScoped<ICacheService, MemCacheService>();
 
 builder.Services.AddControllers();

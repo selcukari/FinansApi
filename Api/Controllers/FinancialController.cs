@@ -33,7 +33,7 @@ namespace Api.Controllers
 
             return _dpFinancialService.GetListDb();
         }
-        [Route("getByFinancial")] // ef
+        [Route("getByFinancial")] // ef, rediscache
         public List<FinancialAssetDto> GetByFinancial(string sembol)
         {
 

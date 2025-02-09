@@ -15,6 +15,7 @@ namespace Business.Concrete
     {
         private readonly IFinancialDal _financialDal;
         private readonly ICacheService _cacheService;
+        // private readonly ICacheService _redisCacheService = new RedisCacheService("localhost:6379");
 
         public FinancialManager(IFinancialDal financialDal, ICacheService cacheService)
         {
