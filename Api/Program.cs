@@ -33,8 +33,6 @@ builder.Services.AddScoped<ICacheService, MemCacheService>();
 
 builder.Services.AddControllers();
 
-var deneme = builder.Configuration.GetSection("ConnectionStrings");
-var deneme1 = builder.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
 builder.Services.AddDbContext<FinancialDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value));
 
