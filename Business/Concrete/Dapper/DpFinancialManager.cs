@@ -1,16 +1,7 @@
 ﻿using Business.Abstract.Cache;
 using Business.Abstract.Dapper;
-using DataAccess.Abstract;
 using DataAccess.Abstract.Dapper;
-using DataAccess.Concrete.Dapper;
-using DataAccess.Concrete.EntityFreamwork;
 using Entities.Dto;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete.Dapper
 {
